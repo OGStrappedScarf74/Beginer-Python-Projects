@@ -1,0 +1,43 @@
+import random
+import art
+
+def no_of_guesses():
+    option = input("Choose difficulty (easy/hard): ").lower()
+    if option == "easy":
+        return 10
+    else:
+        return 5
+
+def checking(guesses, answer, p_no):
+    if p_no > answer:
+        return guesses - 1, "high"
+    elif p_no < answer:
+        return guesses - 1, "low"
+    else:
+        return guesses, "correct"
+
+print(art.welcome)
+print("Welcome to the Number Guessing Game")
+print("I am thinking of a number between 1 and 100")
+
+guesses = no_of_guesses()
+answer = random.randint(1, 100)
+
+while True:
+    print(f"\nGuesses left: {guesses}")
+    p_no = int(input("Enter your guess: "))
+
+    guesses, result = checking(guesses, answer, p_no)
+
+    if result == "correct":
+        print(f"\nYou got it. The number was {answer}")
+        break
+
+    if guesses == 0:
+        print(f"\nOut of guesses. The number was {answer}")
+        break
+
+    if result == "high":
+        print("Too high")
+    else:
+        print("Too low")
